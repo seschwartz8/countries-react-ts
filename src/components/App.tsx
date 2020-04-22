@@ -47,6 +47,38 @@ const App = () => {
         region: 'Europe',
         capital: 'London',
       },
+      {
+        imgUrl:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
+        name: 'England',
+        population: '400,5889,111',
+        region: 'Europe',
+        capital: 'London',
+      },
+      {
+        imgUrl:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
+        name: 'England',
+        population: '400,5889,111',
+        region: 'Europe',
+        capital: 'London',
+      },
+      {
+        imgUrl:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
+        name: 'England',
+        population: '400,5889,111',
+        region: 'Europe',
+        capital: 'London',
+      },
+      {
+        imgUrl:
+          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
+        name: 'England',
+        population: '400,5889,111',
+        region: 'Europe',
+        capital: 'London',
+      },
     ];
     // INPUT FAKE DATA
     dispatch({ type: 'fetch_countries', payload: fakeData });
