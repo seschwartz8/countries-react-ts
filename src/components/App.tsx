@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import CardList from './CardList';
 import Loading from './Loading';
+import Nav from './Nav';
 import axios from 'axios';
 
 export interface Country {
@@ -81,15 +82,24 @@ const App = () => {
       });
   }, []);
 
-  if (state.loading) {
-    return <Loading />;
-  }
+  const renderCountries = () => {
+    if (state.loading) {
+      return <Loading />;
+    }
 
-  if (state.error) {
-    return <h3>{state.error}</h3>;
-  }
+    if (state.error) {
+      return <h3>{state.error}</h3>;
+    }
 
-  return <CardList countries={state.countries} />;
+    return <CardList countries={state.countries} />;
+  };
+
+  return (
+    <div>
+      <Nav />
+      {renderCountries()}
+    </div>
+  );
 };
 
 export default App;
