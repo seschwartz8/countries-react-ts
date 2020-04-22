@@ -1,13 +1,7 @@
 import React from 'react';
-import '../css/App.css';
-import Hangman from './Hangman';
 
 function App() {
-  return (
-    <div className='App'>
-      <Hangman />
-    </div>
-  );
+  return <div>APP</div>;
 }
 
 export default App;
