@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import CardList from './CardList';
+import Loading from './Loading';
 import axios from 'axios';
 
 export interface Country {
@@ -13,6 +14,8 @@ export interface Country {
 
 interface AppState {
   countries: Country[];
+  error: string | null;
+  loading: boolean;
 }
 
 interface Action {
@@ -29,18 +32,27 @@ interface RESTCountriesResponse {
   capital: string;
 }
 
-const reducer = (state: AppState, action: Action) => {
-  switch (action.type) {
-    case 'fetch_countries':
-      return { ...state, countries: action.payload };
-    default:
-      return state;
-  }
-};
-
 const App = () => {
+  const reducer = (state: AppState, action: Action) => {
+    switch (action.type) {
+      case 'fetch_countries':
+        return {
+          ...state,
+          countries: action.payload,
+          error: null,
+          loading: false,
+        };
+      case 'error':
+        return { ...state, error: action.payload, loading: false };
+      default:
+        return state;
+    }
+  };
+
   const initialState: AppState = {
     countries: [],
+    error: null,
+    loading: true,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -50,10 +62,10 @@ const App = () => {
     axios
       .get(url)
       .then((response) => {
-        console.log(response.data);
         const countries: Country[] = response.data.map(
-          (result: RESTCountriesResponse) => {
+          (result: RESTCountriesResponse, index: number) => {
             return {
+              id: index,
               imgUrl: result.flag,
               name: result.name,
               population: result.population,
@@ -65,9 +77,17 @@ const App = () => {
         dispatch({ type: 'fetch_countries', payload: countries });
       })
       .catch((error) => {
-        console.warn(error.message);
+        dispatch({ type: 'error', payload: error.message });
       });
   }, []);
+
+  if (state.loading) {
+    return <Loading />;
+  }
+
+  if (state.error) {
+    return <h3>{state.error}</h3>;
+  }
 
   return <CardList countries={state.countries} />;
 };
