@@ -1,7 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import CardList from './CardList';
+import axios from 'axios';
 
 export interface Country {
+  id: number;
   imgUrl: string;
   name: string;
   population: string;
@@ -17,6 +19,14 @@ interface Action {
   type: string;
   // Accept additional properties
   [x: string]: any;
+}
+
+interface RESTCountriesResponse {
+  flag: string;
+  name: string;
+  population: number;
+  region: string;
+  capital: string;
 }
 
 const reducer = (state: AppState, action: Action) => {
@@ -35,53 +45,28 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    const url = `https://restcountries.eu/rest/v2/all`;
     //Fetch country data and set it on state
-
-    // FOR NOW JUST PUTTING FAKE DATA
-    const fakeData: Country[] = [
-      {
-        imgUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
-        name: 'England',
-        population: '400,5889,111',
-        region: 'Europe',
-        capital: 'London',
-      },
-      {
-        imgUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
-        name: 'England',
-        population: '400,5889,111',
-        region: 'Europe',
-        capital: 'London',
-      },
-      {
-        imgUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
-        name: 'England',
-        population: '400,5889,111',
-        region: 'Europe',
-        capital: 'London',
-      },
-      {
-        imgUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
-        name: 'England',
-        population: '400,5889,111',
-        region: 'Europe',
-        capital: 'London',
-      },
-      {
-        imgUrl:
-          'https://upload.wikimedia.org/wikipedia/en/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1200px-Flag_of_the_United_Kingdom.svg.png',
-        name: 'England',
-        population: '400,5889,111',
-        region: 'Europe',
-        capital: 'London',
-      },
-    ];
-    // INPUT FAKE DATA
-    dispatch({ type: 'fetch_countries', payload: fakeData });
+    axios
+      .get(url)
+      .then((response) => {
+        console.log(response.data);
+        const countries: Country[] = response.data.map(
+          (result: RESTCountriesResponse) => {
+            return {
+              imgUrl: result.flag,
+              name: result.name,
+              population: result.population,
+              region: result.region,
+              capital: result.capital,
+            };
+          }
+        );
+        dispatch({ type: 'fetch_countries', payload: countries });
+      })
+      .catch((error) => {
+        console.warn(error.message);
+      });
   }, []);
 
   return <CardList countries={state.countries} />;

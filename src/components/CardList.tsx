@@ -21,6 +21,7 @@ const CardList: React.FC<CardListProps> = ({
     const cardsHTML = countries.map((country) => {
       return (
         <Card
+          key={country.id}
           imgUrl={country.imgUrl}
           name={country.name}
           population={country.population}
