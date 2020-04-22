@@ -18,7 +18,7 @@ module.exports = {
     'plugin:prettier/recommended',
     // Enables eslint-plugin-prettier and displays prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
 
-    'plugin:react/recommended'
+    'plugin:react/recommended',
   ],
 
   rules: {
@@ -30,25 +30,25 @@ module.exports = {
       'error',
       {
         functions: false,
-        variables: false
-      }
+        variables: false,
+      },
     ],
 
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
-        ignoreRestSiblings: true
-      }
+        ignoreRestSiblings: true,
+      },
     ],
 
     'react/prop-types': 0,
 
-    'react/display-name': 0
+    'react/display-name': 0,
   },
 
   settings: {
     react: {
-      version: 'detect'
-    }
-  }
+      version: 'detect',
+    },
+  },
 };
