@@ -1,4 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const CardContainer = styled.div`
+  box-shadow: 2px 2px 2px 2px #ededed;
+  border: 1px solid blue;
+  background-color: white;
+
+  & img {
+    max-width: 250px;
+  }
+`;
 
 interface CardProps {
   imgUrl: string;
@@ -16,7 +27,7 @@ const Card: React.FC<CardProps> = ({
   capital,
 }: CardProps) => {
   return (
-    <div>
+    <CardContainer>
       <img src={imgUrl} alt={name}></img>
       <h3>{name}</h3>
       <p>
@@ -28,7 +39,7 @@ const Card: React.FC<CardProps> = ({
       <p>
         <b>Capital: </b> {capital}
       </p>
-    </div>
+    </CardContainer>
   );
 };
 
