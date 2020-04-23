@@ -53,6 +53,12 @@ const Card: React.FC<CardProps> = ({
 export default Card;
 
 // Styled component
+const HoverAnimation = keyframes`
+  100% {
+    transform: scale(1.1);
+  }
+`;
+
 interface CardSideProps {
   mode: string;
 }
@@ -97,6 +103,9 @@ const FlipCard = styled.div`
   height: 380px;
   perspective: 1000px;
   border-radius: 5px;
+  &:hover {
+    animation: ${HoverAnimation} 0.3s 1 forwards;
+  }
 `;
 
 const CardFront = styled.div`
