@@ -40,5 +40,5 @@ const CardListContainer = styled.div`
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  padding: 5%;
+  padding: 1% 5%;
 `;
