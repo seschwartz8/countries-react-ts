@@ -40,6 +40,11 @@ interface RESTCountriesResponse {
 
 const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
+    case 'loading':
+      return {
+        ...state,
+        loading: true,
+      };
     case 'fetch_countries':
       return {
         ...state,
@@ -69,6 +74,8 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    dispatch({ type: 'loading' });
+
     const url =
       state.search !== ''
         ? `https://restcountries.eu/rest/v2/name/${state.search}`
