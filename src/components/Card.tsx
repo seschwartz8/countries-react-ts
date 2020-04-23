@@ -44,6 +44,7 @@ export default Card;
 const CardContainer = styled.div`
   border-radius: 5px;
   margin: 2%;
+  max-width: 250px;
 
   & div {
     margin: 5% 0;

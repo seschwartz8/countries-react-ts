@@ -92,7 +92,12 @@ const App = () => {
         dispatch({ type: 'fetch_countries', payload: countries });
       })
       .catch((error) => {
-        dispatch({ type: 'error', payload: error.message });
+        state.search !== ''
+          ? dispatch({
+              type: 'error',
+              payload: 'No countries matched your search.',
+            })
+          : dispatch({ type: 'error', payload: error.message });
       });
   }, [state.search]);
 
@@ -111,7 +116,7 @@ const App = () => {
     }
 
     if (state.error) {
-      return <h3>{state.error}</h3>;
+      return <Error>{state.error}</Error>;
     }
 
     return <CardList countries={state.countries} />;
@@ -132,16 +137,25 @@ export default App;
 
 // Styled component
 const StyledApp = styled.div`
+  min-height: 100vh;
+
   ${({ mode = 'light' }: StyledAppProps) =>
     mode === `light`
       ? `
     background-color: #ededed;
+    color: black;
   `
       : `
     background-color: #212E37;
+    color: white;
   `};
 `;
 
 interface StyledAppProps {
   mode: string;
 }
+
+const Error = styled.h3`
+  text-align: center;
+  margin: 3%;
+`;
