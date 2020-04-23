@@ -18,10 +18,15 @@ const Card: React.FC<CardProps> = ({
   capital,
 }: CardProps) => {
   const mode = useContext(ModeContext);
+  const [flipped, setFlipped] = useState(false);
+
+  const toggleFlip = () => {
+    setFlipped((flipped) => !flipped);
+  };
 
   return (
-    <FlipCard>
-      <InnerCardContainer mode={mode}>
+    <FlipCard onClick={toggleFlip}>
+      <InnerCardContainer flipped={flipped} mode={mode}>
         <CardFront mode={mode}>
           <img src={imgUrl} alt={name}></img>
           <div>
@@ -48,19 +53,25 @@ const Card: React.FC<CardProps> = ({
 export default Card;
 
 // Styled component
-interface CardSide {
+interface CardSideProps {
   mode: string;
+}
+
+interface InnerCardContainerProps {
+  mode: string;
+  flipped: boolean;
 }
 
 const InnerCardContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  cursor: pointer;
   transition: transform 0.6s;
   transform-style: preserve-3d;
   border-radius: 5px;
 
-  ${({ mode = 'light' }: CardSide) =>
+  ${({ mode = 'light' }: InnerCardContainerProps) =>
     mode === `light`
       ? `
     color: black;
@@ -70,6 +81,13 @@ const InnerCardContainer = styled.div`
     color: white;
     box-shadow: 0 0 8px #1D2A36;
   `};
+
+  ${({ flipped = true }: InnerCardContainerProps) =>
+    flipped === true
+      ? `
+      transform: rotateY(180deg);
+      `
+      : ``};
 `;
 
 const FlipCard = styled.div`
@@ -79,10 +97,6 @@ const FlipCard = styled.div`
   height: 380px;
   perspective: 1000px;
   border-radius: 5px;
-
-  &:hover ${InnerCardContainer} {
-    transform: rotateY(180deg);
-  }
 `;
 
 const CardFront = styled.div`
@@ -102,7 +116,7 @@ const CardFront = styled.div`
     border-radius: 5px 5px 0 0;
   }
 
-  ${({ mode = 'light' }: CardSide) =>
+  ${({ mode = 'light' }: CardSideProps) =>
     mode === `light`
       ? `
     background-color: white;
@@ -127,7 +141,7 @@ const CardBack = styled.div`
     padding: 10%;
   }
 
-  ${({ mode = 'light' }: CardSide) =>
+  ${({ mode = 'light' }: CardSideProps) =>
     mode === `light`
       ? `
     background-color: white;
