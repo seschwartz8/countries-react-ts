@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import ModeContext from '../contexts/mode';
 
 interface CardProps {
@@ -52,10 +52,29 @@ const Card: React.FC<CardProps> = ({
 export default Card;
 
 // Styled component
+const HoverAnimation = keyframes`
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+`;
+
 const CardContainer = styled.div`
   border-radius: 5px;
   margin: 2%;
   width: 250px;
+
+  &:hover {
+    animation: ${HoverAnimation} 0.2s 1;
+  }
 
   ${({ mode = 'light' }: CardContainerProps) =>
     mode === `light`
@@ -74,18 +93,26 @@ const CardContainer = styled.div`
     flipped === false
       ? `
       & ${CardFront} {
-        display: block;
+        opacity: 1;
+        height: auto;
+        transition: opacity 1s ease-out;
       }
       & ${CardBack} {
-        display: none;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
       }
       `
       : `
       & ${CardBack} {
-        display: block;
+        opacity: 1;
+        height: auto;
+        transition: opacity 1s ease-out;
       }
       & ${CardFront} {
-        display: none;
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
       }
   `};
 `;
