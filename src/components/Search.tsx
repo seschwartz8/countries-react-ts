@@ -21,7 +21,7 @@ const Search: React.FC<SearchProps> = ({ onSearchSubmit }: SearchProps) => {
       <form>
         <input
           type='text'
-          placeholder='Search...'
+          placeholder='Search by name...'
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />

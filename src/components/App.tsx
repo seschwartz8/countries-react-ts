@@ -21,6 +21,7 @@ interface AppState {
   error: string | null;
   loading: boolean;
   mode: string;
+  search: string;
 }
 
 interface Action {
@@ -50,6 +51,8 @@ const reducer = (state: AppState, action: Action) => {
       return { ...state, error: action.payload, loading: false };
     case 'toggle_mode':
       return { ...state, mode: action.payload };
+    case 'submit_search':
+      return { ...state, search: action.payload };
     default:
       return state;
   }
@@ -61,11 +64,15 @@ const App = () => {
     error: null,
     loading: true,
     mode: 'light',
+    search: '',
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const url = `https://restcountries.eu/rest/v2/all`;
+    const url =
+      state.search !== ''
+        ? `https://restcountries.eu/rest/v2/name/${state.search}`
+        : `https://restcountries.eu/rest/v2/all`;
     //Fetch country data and set it on state
     axios
       .get(url)
@@ -87,7 +94,7 @@ const App = () => {
       .catch((error) => {
         dispatch({ type: 'error', payload: error.message });
       });
-  }, []);
+  }, [state.search]);
 
   const toggleMode = () => {
     const newMode = state.mode === 'light' ? 'dark' : 'light';
@@ -95,7 +102,7 @@ const App = () => {
   };
 
   const onSearchSubmit = (input: string) => {
-    console.log(input);
+    dispatch({ type: 'submit_search', payload: input });
   };
 
   const renderCountries = () => {
