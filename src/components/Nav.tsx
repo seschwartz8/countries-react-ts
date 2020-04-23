@@ -44,6 +44,10 @@ const NavContainer = styled.div`
     color: white;
     box-shadow: 0 0 10px #1D2A36;
     `};
+
+  & div {
+    cursor: pointer;
+  }
 `;
 
 interface NavContainerProps {

@@ -56,5 +56,6 @@ const SearchContainer = styled.div`
   & button {
     border: none;
     background: none;
+    cursor: pointer;
   }
 `;
