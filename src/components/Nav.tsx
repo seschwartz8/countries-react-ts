@@ -12,11 +12,17 @@ const Nav: React.FC<NavProps> = ({ toggleMode }: NavProps) => {
 
   return (
     <NavContainer mode={mode}>
-      <h2>World Traveler</h2>
+      <NavItem>
+        <h2>World Traveler</h2>
+      </NavItem>
 
-      <div onClick={toggleMode}>
-        {mode === 'light' ? LightModeIcon() : DarkModeIcon()}
-      </div>
+      <RightNav>
+        <NavItem>My Destinations</NavItem>
+
+        <NavItem onClick={toggleMode}>
+          {mode === 'light' ? LightModeIcon() : DarkModeIcon()}
+        </NavItem>
+      </RightNav>
     </NavContainer>
   );
 };
@@ -24,6 +30,14 @@ const Nav: React.FC<NavProps> = ({ toggleMode }: NavProps) => {
 export default Nav;
 
 // Styled component
+const NavItem = styled.div`
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
+const RightNav = styled.div``;
+
 const NavContainer = styled.div`
   width: 100%;
   min-height: 70px;
@@ -45,7 +59,14 @@ const NavContainer = styled.div`
     box-shadow: 0 0 10px #1D2A36;
     `};
 
-  & div {
+  & ${RightNav} {
+    display: flex;
+    min-width: 15vw;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & ${NavItem} {
     cursor: pointer;
   }
 `;
