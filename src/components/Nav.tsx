@@ -31,6 +31,8 @@ export default Nav;
 
 // Styled component
 const NavItem = styled.div`
+  white-space: nowrap;
+
   &:hover {
     opacity: 0.8;
   }
@@ -61,13 +63,13 @@ const NavContainer = styled.div`
 
   & ${RightNav} {
     display: flex;
-    min-width: 15vw;
     justify-content: space-between;
     align-items: center;
   }
 
   & ${NavItem} {
     cursor: pointer;
+    margin: 0 15px;
   }
 `;
 

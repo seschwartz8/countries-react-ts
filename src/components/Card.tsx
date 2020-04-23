@@ -43,7 +43,21 @@ const Card: React.FC<CardProps> = ({
           </div>
         </CardFront>
         <CardBack mode={mode}>
-          <div>BACK</div>
+          <StyledButton onClick={() => console.log('clicked')} mode={mode}>
+            Pin Destination
+          </StyledButton>
+          <div>
+            <h3>{name}</h3>
+            <p>
+              <b>Population: </b> {population}
+            </p>
+            <p>
+              <b>Region: </b> {region}
+            </p>
+            <p>
+              <b>Capital: </b> {capital}
+            </p>
+          </div>
         </CardBack>
       </InnerCardContainer>
     </FlipCard>
@@ -144,6 +158,10 @@ const CardBack = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 
   & div {
     margin: 5% 0;
@@ -161,3 +179,25 @@ const CardBack = styled.div`
     color: white;
   `};
 `;
+
+const StyledButton = styled.div`
+  padding: 10%;
+  border-radius: 5px;
+  &:hover {
+    opacity: 0.8;
+    box-shadow: 0 0 10px #1d2a36;
+  }
+
+  ${({ mode = 'light' }: CardSideProps) =>
+    mode === `light`
+      ? `
+      background-color: #d5dbed;
+      `
+      : `
+      background-color: #7676a8;
+      `};
+`;
+
+interface StyledButtonProps {
+  mode: string;
+}
