@@ -94,6 +94,10 @@ const App = () => {
     dispatch({ type: 'toggle_mode', payload: newMode });
   };
 
+  const onSearchSubmit = (input: string) => {
+    console.log(input);
+  };
+
   const renderCountries = () => {
     if (state.loading) {
       return <Loading />;
@@ -110,7 +114,7 @@ const App = () => {
     <ModeContext.Provider value={state.mode}>
       <StyledApp mode={state.mode}>
         <Nav toggleMode={toggleMode} />
-        <Search />
+        <Search onSearchSubmit={onSearchSubmit} />
         {renderCountries()}
       </StyledApp>
     </ModeContext.Provider>

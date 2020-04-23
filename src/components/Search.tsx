@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import ModeContext from '../contexts/mode';
 import { BlackSearchIcon, WhiteSearchIcon } from '../svg/index';
 
-interface SearchProps {}
+interface SearchProps {
+  onSearchSubmit: (input: string) => void;
+}
 
-const Search: React.FC<SearchProps> = () => {
+const Search: React.FC<SearchProps> = ({ onSearchSubmit }: SearchProps) => {
   const mode = useContext(ModeContext);
   const [input, setInput] = useState('');
 
   const onSubmit = (e: React.FormEvent<Element>) => {
     e.preventDefault();
+    onSearchSubmit(input);
   };
 
   return (
