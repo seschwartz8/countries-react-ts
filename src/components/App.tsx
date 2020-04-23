@@ -1,8 +1,25 @@
 import React, { useEffect, useReducer } from 'react';
+import ModeContext from '../contexts/mode';
 import CardList from './CardList';
 import Loading from './Loading';
 import Nav from './Nav';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const StyledApp = styled.div`
+  ${({ mode = 'light' }: StyledAppProps) =>
+    mode === `light`
+      ? `
+    background-color: #ededed;
+  `
+      : `
+    background-color: #212E37;
+  `};
+`;
+
+interface StyledAppProps {
+  mode: string;
+}
 
 export interface Country {
   id: number;
@@ -17,6 +34,7 @@ interface AppState {
   countries: Country[];
   error: string | null;
   loading: boolean;
+  mode: string;
 }
 
 interface Action {
@@ -33,27 +51,30 @@ interface RESTCountriesResponse {
   capital: string;
 }
 
-const App = () => {
-  const reducer = (state: AppState, action: Action) => {
-    switch (action.type) {
-      case 'fetch_countries':
-        return {
-          ...state,
-          countries: action.payload,
-          error: null,
-          loading: false,
-        };
-      case 'error':
-        return { ...state, error: action.payload, loading: false };
-      default:
-        return state;
-    }
-  };
+const reducer = (state: AppState, action: Action) => {
+  switch (action.type) {
+    case 'fetch_countries':
+      return {
+        ...state,
+        countries: action.payload,
+        error: null,
+        loading: false,
+      };
+    case 'error':
+      return { ...state, error: action.payload, loading: false };
+    case 'toggle_mode':
+      return { ...state, mode: action.payload };
+    default:
+      return state;
+  }
+};
 
+const App = () => {
   const initialState: AppState = {
     countries: [],
     error: null,
     loading: true,
+    mode: 'light',
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -82,6 +103,11 @@ const App = () => {
       });
   }, []);
 
+  const toggleMode = () => {
+    const newMode = state.mode === 'light' ? 'dark' : 'light';
+    dispatch({ type: 'toggle_mode', payload: newMode });
+  };
+
   const renderCountries = () => {
     if (state.loading) {
       return <Loading />;
@@ -95,10 +121,12 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Nav />
-      {renderCountries()}
-    </div>
+    <ModeContext.Provider value={state.mode}>
+      <StyledApp mode={state.mode}>
+        <Nav toggleMode={toggleMode} />
+        {renderCountries()}
+      </StyledApp>
+    </ModeContext.Provider>
   );
 };
 

@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import ModeContext from '../contexts/mode';
 
 const CardContainer = styled.div`
-  box-shadow: 0 0 8px #d9d9d9;
   border-radius: 5px;
-  background-color: white;
   margin: 2%;
 
   & div {
@@ -15,7 +14,24 @@ const CardContainer = styled.div`
   & img {
     max-width: 250px;
   }
+
+  ${({ mode = 'light' }: CardContainerProps) =>
+    mode === `light`
+      ? `
+      background-color: white;
+      color: black;
+      box-shadow: 0 0 8px #d9d9d9;
+      `
+      : `
+      background-color: #324354;
+      color: white;
+      box-shadow: 0 0 8px #1D2A36;
+      `};
 `;
+
+interface CardContainerProps {
+  mode: string;
+}
 
 interface CardProps {
   imgUrl: string;
@@ -32,8 +48,10 @@ const Card: React.FC<CardProps> = ({
   region,
   capital,
 }: CardProps) => {
+  const mode = useContext(ModeContext);
+
   return (
-    <CardContainer>
+    <CardContainer mode={mode}>
       <img src={imgUrl} alt={name}></img>
       <div>
         <h3>{name}</h3>

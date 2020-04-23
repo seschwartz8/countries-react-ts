@@ -10,6 +10,10 @@ const CardListContainer = styled.div`
   padding: 5%;
 `;
 
+interface CardListContainerProps {
+  mode: string;
+}
+
 interface CardListProps {
   countries?: Country[];
 }

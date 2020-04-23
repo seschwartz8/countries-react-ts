@@ -1,23 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { LightModeIcon } from '../svg/index';
+import { LightModeIcon, DarkModeIcon } from '../svg/index';
+import ModeContext from '../contexts/mode';
 
 const NavContainer = styled.div`
   width: 100%;
   min-height: 70px;
   padding: 0 5%;
-  box-shadow: 0 0 10px #d9d9d9;
-  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  ${({ mode = 'light' }: NavContainerProps) =>
+    mode === `light`
+      ? `
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 10px #d9d9d9;
+    `
+      : `
+    background-color: #324354;
+    color: white;
+    box-shadow: 0 0 10px #1D2A36;
+    `};
 `;
 
-const Nav = () => {
+interface NavProps {
+  toggleMode: () => void;
+}
+
+interface NavContainerProps {
+  mode: string;
+}
+
+const Nav: React.FC<NavProps> = ({ toggleMode }: NavProps) => {
+  const mode = useContext(ModeContext);
+
   return (
-    <NavContainer>
+    <NavContainer mode={mode}>
       <h2>Country Finder</h2>
-      {LightModeIcon()}
+
+      <div onClick={toggleMode}>
+        {mode === 'light' ? LightModeIcon() : DarkModeIcon()}
+      </div>
     </NavContainer>
   );
 };
