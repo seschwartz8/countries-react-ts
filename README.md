@@ -1,3 +1,67 @@
+# World Traveler
+
+#### A travel app that displays information about each country and allows you to pin your favorite destinations on the map.
+
+#### By Sarah "Sasa" Schwartz, May 2020
+
+---
+
+## Table of Contents
+
+1. [Description](#description)
+2. [Installation](#installation)
+3. [Technologies Used](#technologies-used)
+4. [Sample Images](#sample-images)
+5. [Known Bugs](#known-bugs)
+
+---
+
+## Description
+
+A travel app that displays information about each country and allows you to pin your favorite destinations on the map. This app gathers country information and allows you to limit the results that are displayed by searching for a country's name. You can pin the destinations you plan to visit and see all your pins displayed on a map. The app can be used in light mode or dark mode.
+
+## Installation
+
+- clone repository to your desktop
+- cd into client directory
+
+  - npm install
+  - npm start (starts app on localhost:3000)
+
+- open second terminal window
+- cd into json-server directory
+
+  - npm install
+  - npm start (starts api server)
+  - (note that all data will be stored in db.json file in json-server directory)
+
+## Technologies Used
+
+- React Typescript
+- React router
+- json server (for running API)
+- Material Design Icons
+- Syled components
+- REST Countries API
+- MapBox API
+- CSS animations
+
+## Sample Images
+
+##### Homepage view of all countries
+
+![Homepage view of all countries](./img/homepage.png)
+
+##### Dark Mode
+
+![Dark mode of homepage](./img/dark-mode.png)
+
+## Known bugs
+
+- Map and pins are still being implemented.
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -42,3 +106,27 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -187,7 +187,7 @@ const StyledButton = styled.div`
     opacity: 0.8;
   }
 
-  ${({ mode = 'light' }: CardSideProps) =>
+  ${({ mode = 'light' }: StyledButtonProps) =>
     mode === `light`
       ? `
       background-color: #d5dbed;
