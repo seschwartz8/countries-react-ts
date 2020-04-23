@@ -3,6 +3,7 @@ import ModeContext from '../contexts/mode';
 import CardList from './CardList';
 import Loading from './Loading';
 import Nav from './Nav';
+import Search from './Search';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -109,6 +110,7 @@ const App = () => {
     <ModeContext.Provider value={state.mode}>
       <StyledApp mode={state.mode}>
         <Nav toggleMode={toggleMode} />
+        <Search />
         {renderCountries()}
       </StyledApp>
     </ModeContext.Provider>
