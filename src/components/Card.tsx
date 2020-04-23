@@ -18,124 +18,123 @@ const Card: React.FC<CardProps> = ({
   capital,
 }: CardProps) => {
   const mode = useContext(ModeContext);
-  const [flipped, setFlipped] = useState(false);
 
   return (
-    <CardContainer
-      mode={mode}
-      flipped={flipped}
-      onClick={() => setFlipped((flipped) => !flipped)}
-    >
-      <CardBack>
-        <div>BACK</div>
-      </CardBack>
-
-      <CardFront>
-        <img src={imgUrl} alt={name}></img>
-        <div>
-          <h3>{name}</h3>
-          <p>
-            <b>Population: </b> {population}
-          </p>
-          <p>
-            <b>Region: </b> {region}
-          </p>
-          <p>
-            <b>Capital: </b> {capital}
-          </p>
-        </div>
-      </CardFront>
-    </CardContainer>
+    <FlipCard>
+      <InnerCardContainer mode={mode}>
+        <CardFront mode={mode}>
+          <img src={imgUrl} alt={name}></img>
+          <div>
+            <h3>{name}</h3>
+            <p>
+              <b>Population: </b> {population}
+            </p>
+            <p>
+              <b>Region: </b> {region}
+            </p>
+            <p>
+              <b>Capital: </b> {capital}
+            </p>
+          </div>
+        </CardFront>
+        <CardBack mode={mode}>
+          <div>BACK</div>
+        </CardBack>
+      </InnerCardContainer>
+    </FlipCard>
   );
 };
 
 export default Card;
 
 // Styled component
-const HoverAnimation = keyframes`
-  25% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  75% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-`;
+interface CardSide {
+  mode: string;
+}
 
-const CardContainer = styled.div`
+const InnerCardContainer = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
   border-radius: 5px;
-  margin: 2%;
-  width: 250px;
 
-  &:hover {
-    animation: ${HoverAnimation} 0.2s 1;
-  }
-
-  ${({ mode = 'light' }: CardContainerProps) =>
+  ${({ mode = 'light' }: CardSide) =>
     mode === `light`
       ? `
-    background-color: white;
     color: black;
     box-shadow: 0 0 8px #d9d9d9;
     `
       : `
-    background-color: #324354;
     color: white;
     box-shadow: 0 0 8px #1D2A36;
-`};
-
-  ${({ flipped = true }: CardContainerProps) =>
-    flipped === false
-      ? `
-      & ${CardFront} {
-        opacity: 1;
-        height: auto;
-        transition: opacity 1s ease-out;
-      }
-      & ${CardBack} {
-        opacity: 0;
-        height: 0;
-        overflow: hidden;
-      }
-      `
-      : `
-      & ${CardBack} {
-        opacity: 1;
-        height: auto;
-        transition: opacity 1s ease-out;
-      }
-      & ${CardFront} {
-        opacity: 0;
-        height: 0;
-        overflow: hidden;
-      }
   `};
 `;
 
-interface CardContainerProps {
-  mode: string;
-  flipped: boolean;
-}
+const FlipCard = styled.div`
+  background-color: transparent;
+  margin: 2%;
+  width: 250px;
+  height: 380px;
+  perspective: 1000px;
+  border-radius: 5px;
+
+  &:hover ${InnerCardContainer} {
+    transform: rotateY(180deg);
+  }
+`;
 
 const CardFront = styled.div`
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+
   & div {
     margin: 5% 0;
     padding: 10%;
   }
 
   & img {
-    max-width: 100%;
+    max-width: 250px;
+    border-radius: 5px 5px 0 0;
   }
+
+  ${({ mode = 'light' }: CardSide) =>
+    mode === `light`
+      ? `
+    background-color: white;
+    color: black;
+    `
+      : `
+    background-color: #324354;
+    color: white;
+  `};
 `;
 
 const CardBack = styled.div`
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+
   & div {
     margin: 5% 0;
     padding: 10%;
   }
+
+  ${({ mode = 'light' }: CardSide) =>
+    mode === `light`
+      ? `
+    background-color: white;
+    color: black;
+    `
+      : `
+    background-color: #324354;
+    color: white;
+  `};
 `;
