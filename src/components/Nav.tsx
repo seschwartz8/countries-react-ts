@@ -3,6 +3,27 @@ import styled from 'styled-components';
 import { LightModeIcon, DarkModeIcon } from '../svg/index';
 import ModeContext from '../contexts/mode';
 
+interface NavProps {
+  toggleMode: () => void;
+}
+
+const Nav: React.FC<NavProps> = ({ toggleMode }: NavProps) => {
+  const mode = useContext(ModeContext);
+
+  return (
+    <NavContainer mode={mode}>
+      <h2>World Traveler</h2>
+
+      <div onClick={toggleMode}>
+        {mode === 'light' ? LightModeIcon() : DarkModeIcon()}
+      </div>
+    </NavContainer>
+  );
+};
+
+export default Nav;
+
+// Styled component
 const NavContainer = styled.div`
   width: 100%;
   min-height: 70px;
@@ -25,26 +46,6 @@ const NavContainer = styled.div`
     `};
 `;
 
-interface NavProps {
-  toggleMode: () => void;
-}
-
 interface NavContainerProps {
   mode: string;
 }
-
-const Nav: React.FC<NavProps> = ({ toggleMode }: NavProps) => {
-  const mode = useContext(ModeContext);
-
-  return (
-    <NavContainer mode={mode}>
-      <h2>Country Finder</h2>
-
-      <div onClick={toggleMode}>
-        {mode === 'light' ? LightModeIcon() : DarkModeIcon()}
-      </div>
-    </NavContainer>
-  );
-};
-
-export default Nav;

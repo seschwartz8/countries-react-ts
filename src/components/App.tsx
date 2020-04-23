@@ -6,21 +6,6 @@ import Nav from './Nav';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const StyledApp = styled.div`
-  ${({ mode = 'light' }: StyledAppProps) =>
-    mode === `light`
-      ? `
-    background-color: #ededed;
-  `
-      : `
-    background-color: #212E37;
-  `};
-`;
-
-interface StyledAppProps {
-  mode: string;
-}
-
 export interface Country {
   id: number;
   imgUrl: string;
@@ -131,3 +116,19 @@ const App = () => {
 };
 
 export default App;
+
+// Styled component
+const StyledApp = styled.div`
+  ${({ mode = 'light' }: StyledAppProps) =>
+    mode === `light`
+      ? `
+    background-color: #ededed;
+  `
+      : `
+    background-color: #212E37;
+  `};
+`;
+
+interface StyledAppProps {
+  mode: string;
+}

@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const LoadingContent = styled.h2`
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-top: 20px;
-  text-align: center;
-`;
-
 interface LoadingProps {
   text?: string;
   speed?: number;
@@ -33,3 +25,12 @@ const Loading: React.FC<LoadingProps> = ({ text = 'Loading', speed = 300 }) => {
 };
 
 export default Loading;
+
+// Styled component
+const LoadingContent = styled.h2`
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-top: 20px;
+  text-align: center;
+`;

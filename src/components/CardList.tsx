@@ -3,13 +3,6 @@ import Card from './Card';
 import { Country } from './App';
 import styled from 'styled-components';
 
-const CardListContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  padding: 5%;
-`;
-
 interface CardListContainerProps {
   mode: string;
 }
@@ -41,3 +34,11 @@ const CardList: React.FC<CardListProps> = ({
 };
 
 export default CardList;
+
+// Styled component
+const CardListContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 5%;
+`;
