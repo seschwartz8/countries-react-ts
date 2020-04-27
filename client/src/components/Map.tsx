@@ -15,7 +15,11 @@ const initialState = {
     width: 400,
     zoom: 2,
   },
-  markerLocation: { latitude: 37.776021, longitude: -122.4171949 },
+  markerLocations: [
+    { latitude: 37.776021, longitude: -130.4171949 },
+    { latitude: 37.776021, longitude: -122.4171949 },
+    { latitude: 45.776021, longitude: -122.4171949 },
+  ],
 };
 
 type State = typeof initialState;
@@ -49,6 +53,16 @@ export default class Map extends React.Component<{}, State> {
     }));
   };
 
+  renderMarkers = () => {
+    return this.state.markerLocations.map((location) => {
+      return (
+        <Marker latitude={location.latitude} longitude={location.longitude}>
+          {PinIcon()}
+        </Marker>
+      );
+    });
+  };
+
   render() {
     const { viewport } = this.state;
     return (
@@ -57,13 +71,7 @@ export default class Map extends React.Component<{}, State> {
         mapboxApiAccessToken={MAPBOX_TOKEN}
         onViewportChange={(v: Viewport) => this.updateViewport(v)}
       >
-        <Marker
-          latitude={this.state.markerLocation.latitude}
-          longitude={this.state.markerLocation.longitude}
-        >
-          Hello
-          {PinIcon()}
-        </Marker>
+        {this.renderMarkers()}
       </ReactMapGL>
     );
   }
