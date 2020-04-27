@@ -1,3 +1,10 @@
 {
-  "destinations": []
+  "destinations": [
+    {
+      "name": "hello",
+      "latitude": 11111,
+      "longitude": 33333,
+      "id": 1
+    }
+  ]
 }

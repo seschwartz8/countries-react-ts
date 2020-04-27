@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import ModeContext from '../contexts/mode';
+import axios from 'axios';
 
 interface CardProps {
   imgUrl: string;
@@ -19,14 +20,27 @@ const Card: React.FC<CardProps> = ({
 }: CardProps) => {
   const mode = useContext(ModeContext);
   const [flipped, setFlipped] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const toggleFlip = () => {
     setFlipped((flipped) => !flipped);
   };
 
-  const saveDestination = () => {
-    console.log('hi');
+  const clickSaveButton = () => {
+    setSaved(true);
   };
+
+  useEffect(() => {
+    const url = 'http://localhost:3001';
+
+    if (saved) {
+      axios.post(`${url}/destinations`, {
+        name: 'hello',
+        latitude: 11111,
+        longitude: 33333,
+      });
+    }
+  }, [saved]);
 
   return (
     <FlipCard onClick={toggleFlip}>
@@ -47,7 +61,7 @@ const Card: React.FC<CardProps> = ({
           </div>
         </CardFront>
         <CardBack mode={mode}>
-          <StyledButton onClick={saveDestination} mode={mode}>
+          <StyledButton onClick={clickSaveButton} mode={mode}>
             Save Destination
           </StyledButton>
           <div>

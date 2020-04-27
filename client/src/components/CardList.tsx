@@ -3,10 +3,6 @@ import Card from './Card';
 import { Country } from './App';
 import styled from 'styled-components';
 
-interface CardListContainerProps {
-  mode: string;
-}
-
 interface CardListProps {
   countries?: Country[];
 }
