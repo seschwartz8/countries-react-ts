@@ -13,12 +13,13 @@
 3. [Technologies Used](#technologies-used)
 4. [Sample Images](#sample-images)
 5. [Known Bugs](#known-bugs)
+6. [Opportunities For Improvement](#opportunities-for-improvement)
 
 ---
 
 ## Description
 
-A travel app that displays information about each country and allows you to pin your favorite destinations on the map. This app gathers country information and allows you to limit the results that are displayed by searching for a country's name. You can pin the destinations you plan to visit and see all your pins displayed on a map. The app can be used in light mode or dark mode.
+A travel app that displays information about each country and allows you to save your favorite destinations on the map. This app gathers country information and allows you to limit the results that are displayed by searching for a country's name. You can save the destinations you plan to visit and see them all displayed geographically as pins on a map. The app can be used in light mode or dark mode.
 
 ## Installation
 
@@ -33,18 +34,18 @@ A travel app that displays information about each country and allows you to pin 
 
   - npm install
   - npm start (starts api server)
-  - (note that all data will be stored in db.json file in json-server directory)
+  - (note that all saved destination data will be stored in db.json file in json-server directory)
 
 ## Technologies Used
 
 - React Typescript
-- React router
-- json server (for running API)
+- React Router
+- Json Server (for running API)
 - Material Design Icons
-- Syled components
+- Syled Components
 - REST Countries API
-- MapBox API
-- CSS animations
+- React Map GL
+- CSS Animations
 
 ## Sample Images
 
@@ -56,9 +57,20 @@ A travel app that displays information about each country and allows you to pin 
 
 ![Dark mode of homepage](./img/dark-mode.png)
 
-## Known bugs
+##### My saved destinations
 
-- Map and pins are still being implemented.
+![My saved destinations](./img/destinations.png)
+
+## Known Bugs
+
+- No knowns bugs
+
+## Opportunities For Improvement
+
+- Implementing the ability to remove pins
+- Creating different colored pins for destinations you would like to visit vs. ones you have visited
+- Indicating on the country cards which countries have been pinned already so that a user does not have to flip cards they've already pinned
+- Programmatically clearing search results without refreshing or entering an empty search
 
 ---
 
