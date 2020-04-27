@@ -1,16 +1,10 @@
 {
   "destinations": [
     {
-      "name": "Angola",
-      "latitude": -12.5,
-      "longitude": 18.5,
+      "name": "United States of America",
+      "latitude": 38,
+      "longitude": -97,
       "id": 1
-    },
-    {
-      "name": "Anguilla",
-      "latitude": 18.25,
-      "longitude": -63.16666666,
-      "id": 2
     }
   ]
 }
