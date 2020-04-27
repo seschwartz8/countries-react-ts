@@ -1,41 +1,45 @@
 import * as React from 'react';
-import ReactMapGL, { NavigationControl } from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
+import { PinIcon } from '../svg/index';
 
 const MAPBOX_TOKEN =
   'pk.eyJ1Ijoic2VzY2h3YXJ0ejgiLCJhIjoiY2s5aW83cXNxMWJ1MTNrbGxzaW55YmFqbCJ9.Wcju4UV4OLz90abpY6HtuA' ||
   '';
+
 const initialState = {
   viewport: {
     height: 400,
     latitude: 37.776021,
     longitude: -122.4171949,
-    minZoom: 1,
+    minZoom: 2,
     width: 400,
-    zoom: 1,
+    zoom: 2,
   },
+  markerLocation: { latitude: 37.776021, longitude: -122.4171949 },
 };
+
 type State = typeof initialState;
 type Viewport = typeof initialState.viewport;
 
 export default class Map extends React.Component<{}, State> {
-  public state: State = initialState;
+  state: State = initialState;
 
-  public componentDidMount() {
+  componentDidMount() {
     window.addEventListener('resize', this.resize);
     this.resize();
   }
 
-  public componentWillUnmount() {
+  componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
   }
 
-  public updateViewport = (viewport: Viewport) => {
+  updateViewport = (viewport: Viewport) => {
     this.setState((prevState) => ({
       viewport: { ...prevState.viewport, ...viewport },
     }));
   };
 
-  public resize = () => {
+  resize = () => {
     this.setState((prevState) => ({
       viewport: {
         ...prevState.viewport,
@@ -45,7 +49,7 @@ export default class Map extends React.Component<{}, State> {
     }));
   };
 
-  public render() {
+  render() {
     const { viewport } = this.state;
     return (
       <ReactMapGL
@@ -53,9 +57,13 @@ export default class Map extends React.Component<{}, State> {
         mapboxApiAccessToken={MAPBOX_TOKEN}
         onViewportChange={(v: Viewport) => this.updateViewport(v)}
       >
-        <div style={{ position: 'absolute', right: 30, bottom: 30 }}>
-          <NavigationControl onViewportChange={this.updateViewport} />
-        </div>
+        <Marker
+          latitude={this.state.markerLocation.latitude}
+          longitude={this.state.markerLocation.longitude}
+        >
+          Hello
+          {PinIcon()}
+        </Marker>
       </ReactMapGL>
     );
   }
