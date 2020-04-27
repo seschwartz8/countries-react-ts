@@ -9,7 +9,7 @@ interface CountriesProps {
 const Countries: React.FC<CountriesProps> = ({
   onSearchSubmit,
   renderContent,
-}) => {
+}: CountriesProps) => {
   return (
     <>
       <Search onSearchSubmit={onSearchSubmit} />

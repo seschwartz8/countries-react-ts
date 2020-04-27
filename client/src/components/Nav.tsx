@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { LightModeIcon, DarkModeIcon } from '../svg/index';
+import { NavLink } from 'react-router-dom';
 import ModeContext from '../contexts/mode';
 
 interface NavProps {
@@ -12,12 +13,16 @@ const Nav: React.FC<NavProps> = ({ toggleMode }: NavProps) => {
 
   return (
     <NavContainer mode={mode}>
-      <NavItem>
-        <h2>World Traveler</h2>
-      </NavItem>
+      <NavLink to='/'>
+        <NavItem>
+          <h2>World Traveler</h2>
+        </NavItem>
+      </NavLink>
 
       <RightNav>
-        <NavItem>My Destinations</NavItem>
+        <NavLink to='/destinations'>
+          <NavItem>My Destinations</NavItem>
+        </NavLink>
 
         <NavItem onClick={toggleMode}>
           {mode === 'light' ? LightModeIcon() : DarkModeIcon()}
@@ -54,11 +59,17 @@ const NavContainer = styled.div`
     background-color: white;
     color: black;
     box-shadow: 0 0 10px #d9d9d9;
+    & a {
+      color: black;
+    }
     `
       : `
     background-color: #324354;
     color: white;
     box-shadow: 0 0 10px #1D2A36;
+    & a {
+      color: white;
+    }
     `};
 
   & ${RightNav} {

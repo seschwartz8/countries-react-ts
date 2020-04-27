@@ -5,6 +5,7 @@ import CardList from './CardList';
 import Loading from './Loading';
 import Nav from './Nav';
 import Countries from './Countries';
+import Destinations from './Destinations';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -147,6 +148,7 @@ const App = () => {
                 />
               )}
             />
+            <Route exact path='/destinations' component={Destinations} />
           </Switch>
         </StyledApp>
       </ModeContext.Provider>
