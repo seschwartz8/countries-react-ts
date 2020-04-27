@@ -24,6 +24,10 @@ const Card: React.FC<CardProps> = ({
     setFlipped((flipped) => !flipped);
   };
 
+  const saveDestination = () => {
+    console.log('hi');
+  };
+
   return (
     <FlipCard onClick={toggleFlip}>
       <InnerCardContainer flipped={flipped} mode={mode}>
@@ -43,8 +47,8 @@ const Card: React.FC<CardProps> = ({
           </div>
         </CardFront>
         <CardBack mode={mode}>
-          <StyledButton onClick={() => console.log('clicked')} mode={mode}>
-            Pin Destination
+          <StyledButton onClick={saveDestination} mode={mode}>
+            Save Destination
           </StyledButton>
           <div>
             <h3>{name}</h3>

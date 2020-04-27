@@ -22,11 +22,24 @@ const initialState = {
   ],
 };
 
+interface LatLng {
+  latitude: number;
+  longitude: number;
+}
+
+interface MapProps {
+  destinations: LatLng[];
+}
+
 type State = typeof initialState;
 type Viewport = typeof initialState.viewport;
 
-export default class Map extends React.Component<{}, State> {
-  state: State = initialState;
+export default class Map extends React.Component<MapProps, State> {
+  constructor(props: MapProps) {
+    super(props);
+
+    this.state = initialState;
+  }
 
   componentDidMount() {
     window.addEventListener('resize', this.resize);
@@ -54,9 +67,13 @@ export default class Map extends React.Component<{}, State> {
   };
 
   renderMarkers = () => {
-    return this.state.markerLocations.map((location) => {
+    return this.props.destinations.map((location, index) => {
       return (
-        <Marker latitude={location.latitude} longitude={location.longitude}>
+        <Marker
+          key={index}
+          latitude={location.latitude}
+          longitude={location.longitude}
+        >
           {PinIcon()}
         </Marker>
       );
