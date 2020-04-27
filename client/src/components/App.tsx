@@ -16,6 +16,8 @@ export interface Country {
   population: string;
   region: string;
   capital: string;
+  latitude: number;
+  longitude: number;
 }
 
 interface AppState {
@@ -38,6 +40,7 @@ interface RESTCountriesResponse {
   population: number;
   region: string;
   capital: string;
+  latlng: [number, number];
 }
 
 const reducer = (state: AppState, action: Action) => {
@@ -95,6 +98,8 @@ const App = () => {
               population: result.population,
               region: result.region,
               capital: result.capital,
+              latitude: result.latlng[0],
+              longitude: result.latlng[1],
             };
           }
         );

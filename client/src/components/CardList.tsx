@@ -20,6 +20,8 @@ const CardList: React.FC<CardListProps> = ({
           population={country.population}
           region={country.region}
           capital={country.capital}
+          latitude={country.latitude}
+          longitude={country.longitude}
         />
       );
     });

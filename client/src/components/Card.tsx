@@ -9,6 +9,8 @@ interface CardProps {
   population: string;
   region: string;
   capital: string;
+  latitude: number;
+  longitude: number;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -17,6 +19,8 @@ const Card: React.FC<CardProps> = ({
   population,
   region,
   capital,
+  latitude,
+  longitude,
 }: CardProps) => {
   const mode = useContext(ModeContext);
   const [flipped, setFlipped] = useState(false);
@@ -35,9 +39,9 @@ const Card: React.FC<CardProps> = ({
 
     if (saved) {
       axios.post(`${url}/destinations`, {
-        name: 'hello',
-        latitude: 11111,
-        longitude: 33333,
+        name: name,
+        latitude: latitude,
+        longitude: longitude,
       });
     }
   }, [saved]);
