@@ -1,9 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ModeContext from '../contexts/mode';
 import CardList from './CardList';
 import Loading from './Loading';
 import Nav from './Nav';
-import Search from './Search';
+import Countries from './Countries';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -130,13 +131,26 @@ const App = () => {
   };
 
   return (
-    <ModeContext.Provider value={state.mode}>
-      <StyledApp mode={state.mode}>
-        <Nav toggleMode={toggleMode} />
-        <Search onSearchSubmit={onSearchSubmit} />
-        {renderCountries()}
-      </StyledApp>
-    </ModeContext.Provider>
+    <Router>
+      <ModeContext.Provider value={state.mode}>
+        <StyledApp mode={state.mode}>
+          <Nav toggleMode={toggleMode} />
+          <Switch>
+            <Route
+              exact
+              path='/'
+              render={(props) => (
+                <Countries
+                  {...props}
+                  onSearchSubmit={onSearchSubmit}
+                  renderContent={renderCountries}
+                />
+              )}
+            />
+          </Switch>
+        </StyledApp>
+      </ModeContext.Provider>
+    </Router>
   );
 };
 
