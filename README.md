@@ -49,7 +49,7 @@ A travel app that displays information about each country and allows you to save
 
 ## Sample Images
 
-##### Homepage view of all countries
+##### Homepage View Of All Countries
 
 ![Homepage view of all countries](./img/homepage.png)
 
@@ -57,13 +57,13 @@ A travel app that displays information about each country and allows you to save
 
 ![Dark mode of homepage](./img/dark-mode.png)
 
-##### My saved destinations
+##### My Saved Destinations
 
 ![My saved destinations](./img/destinations.png)
 
 ## Known Bugs
 
-- No knowns bugs
+- No known bugs
 
 ## Opportunities For Improvement
 
